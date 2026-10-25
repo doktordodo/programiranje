@@ -19,26 +19,26 @@ void ispisiSazetak();
 int main() {
     cout << fixed << setprecision(2);
 
-    for (int i = 1; i <= 3; i++) {
+    for (int i = 1; i <= 3; i = i + 1) {
         int kolicina;
-
+        
         while (true) {
             cout << "Kupnja " << i << " - unesi broj ulaznica (1-30): ";
             cin >> kolicina;
-
+            
             if (ispravanUnos(kolicina)) {
                 break;
             }
         }
-
+        
         double trenutniIznos = izracunajIznos(kolicina);
-
+        
         evidentirajKupnju(kolicina, trenutniIznos);
         ispisiKupnju(i, trenutniIznos);
     }
-
+    
     ispisiSazetak();
-
+    
     return 0;
 }
 
@@ -53,19 +53,19 @@ bool ispravanUnos(int kolicina) {
 double izracunajIznos(int kolicina) {
     double osnovniIznos = kolicina * CIJENA_ULAZNICE;
     double konacniIznos;
-
+    
     if (kolicina >= PRAG_POPUSTA) {
         konacniIznos = osnovniIznos * (1.0 - STOPA_POPUSTA);
     } else {
         konacniIznos = osnovniIznos;
     }
-
+    
     return konacniIznos;
 }
 
 void evidentirajKupnju(int kolicina, double iznos) {
-    ukupnoUlaznica += kolicina;
-    ukupniPrihod += iznos;
+    ukupnoUlaznica = ukupnoUlaznica + kolicina;
+    ukupniPrihod = ukupniPrihod + iznos;
 }
 
 void ispisiKupnju(int redniBroj, double iznos) {
@@ -76,4 +76,3 @@ void ispisiSazetak() {
     cout << "Ukupno prodanih ulaznica: " << ukupnoUlaznica << endl;
     cout << "Ukupni prihod: " << ukupniPrihod << " EUR" << endl;
 }
-
